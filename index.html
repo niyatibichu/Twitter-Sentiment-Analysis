@@ -1,0 +1,99 @@
+<!doctype html>
+<html ng-app="myapp">
+
+<head>
+    <title>Twitter Sentiment Analysis Using Location</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <!--H-E-A-D-E-R-->
+    <header>
+        <nav>
+            <div class="nav-wrapper indigo darken-1 " id="bar1">
+
+                <a href="index.html" class="brand-logo" id="appname">
+                    Sentiment Analysis Using Location</a>
+                <a href="#" data-activates="nav-mobile" class="right button-collapse">
+                    <i class="mdi-navigation-more-vert"></i></a>
+            </div>
+        </nav>
+    </header>
+    <br>
+
+    <!--M-A-I-N-->
+    <main ng-controller="MainController">
+        <div class="row">
+            <form class="card indigo lighten-5 col s4 m3" style="margin-left: 2em">
+                <h4 class="flow-text bold">Enter Location:</h4>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="longitude" type="number" step="0.00000001" class="validate" ng-model="longitude">
+                        <label for="longitude">Longitude</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="latitude" type="number" step="0.00000001" class="validate" ng-model="latitude">
+                            <label for="latitude">Latitude</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="radius" type="number" step="0.00000001" class="validate" ng-model="radius">
+                            <label for="radius">Radius</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <button class="btn waves-effect waves-light indigo" type="submit" ng-click="submitData()" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+
+    <!--F-O-O-T-E-R-->
+    <footer class="indigo darken-1 page-footer ">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">TSAUL</h5>
+                    <p class="grey-text text-lighten-4">Terms Of Service</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Discover</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#">About us</a></li>
+                        <li><a class="grey-text text-lighten-3" href="index.html">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">TSAUL Inc.</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Compiled and minified JavaScript -->
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+</body>
