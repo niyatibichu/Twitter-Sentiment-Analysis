@@ -48,11 +48,9 @@ class StreamListener(tweepy.StreamListener):
                 # if self.count%1000==0:
                 #     print "Created AT: "+json_data.get("created_at")
                 #     print self.count
-                #     print "--------------------------------------------------"           
+                #     print "--------------------------------------------------"  
 
-                es.index(index="test2",
-                        doc_type="test2",
-                        body={
+                doc_body={
                             "ID":json_data["id"],
                             "text":json_data["text"],
                             "date":json_data["created_at"],
@@ -63,10 +61,22 @@ class StreamListener(tweepy.StreamListener):
                             "Country":json_data["place"]["country"],
                             "Country_Code":json_data["place"]["country_code"],
                             "Full_Name":json_data["place"].get('full_name'),
-                            "Name":json_data["place"].get('name')
+                            "Name":json_data["place"].get('name'),
+                            "location":[json_data["coordinates"]["coordinates"][1],json_data["coordinates"]["coordinates"][0]]
+                        }         
 
-                        }
+                es.index(index="test5",
+                        doc_type="test5",
+                        body=doc_body
                         )
+
+        
+                # es.index(index='location',doc_type="test5", body=mappings)
+                # es_entries['geo'] = 
+                # es_entries['location'] = [data['latitude'],data['longitude']]}
+                # # ...
+                es.index(index="location", doc_type="test5", body=doc_body)
+
 
         except Exception, e:
             print e

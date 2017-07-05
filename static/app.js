@@ -5,17 +5,23 @@ app.controller("MainController", ['$scope', '$http', function ($scope, $http) {
     $scope.submitData = function () {
 
         console.log($scope.latitude);
+        console.log($scope.longitude);
+        console.log($scope.radius);
 
         $http({
-            method: 'GET',
-            url: '/getTweets',
+            url: '/getdata',
+            method: 'GET',            
+            headers:{
+                'Content-Type':'application/json'
+            },
             params:{
-                lon:$scope.longitude,
                 lat:$scope.latitude,
+                lon:$scope.longitude,                
                 rad:$scope.radius
             }
         }).then(function success(response) {
-            $scope.tweets=response;
+           // $scope.tweets=response;
+           //console.log(response)
 
         }, function error(error) {
             console.log(error);            
