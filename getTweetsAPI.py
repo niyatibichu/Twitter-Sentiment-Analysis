@@ -49,7 +49,15 @@ class StreamListener(tweepy.StreamListener):
                 #     print "Created AT: "+json_data.get("created_at")
                 #     print self.count
                 #     print "--------------------------------------------------"  
-
+                # mappings={"test6": {
+                #     "properties": {
+                #                  "location": {
+                #                     "type": "geo_point"
+                #                              }
+                #                           }
+                #                 }
+                #                   }
+                # es.index(index="test6", doc_type="test6",body=mappings)                
                 doc_body={
                             "ID":json_data["id"],
                             "text":json_data["text"],
@@ -63,19 +71,14 @@ class StreamListener(tweepy.StreamListener):
                             "Full_Name":json_data["place"].get('full_name'),
                             "Name":json_data["place"].get('name'),
                             "location":[json_data["coordinates"]["coordinates"][1],json_data["coordinates"]["coordinates"][0]]
-                        }         
-
-                es.index(index="test5",
-                        doc_type="test5",
-                        body=doc_body
-                        )
+                        }      
 
         
                 # es.index(index='location',doc_type="test5", body=mappings)
                 # es_entries['geo'] = 
                 # es_entries['location'] = [data['latitude'],data['longitude']]}
                 # # ...
-                es.index(index="location", doc_type="test5", body=doc_body)
+                es.index(index="test6", doc_type="test6",ignore=400, body=doc_body)
 
 
         except Exception, e:

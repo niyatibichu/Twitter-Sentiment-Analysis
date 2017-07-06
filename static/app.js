@@ -10,21 +10,21 @@ app.controller("MainController", ['$scope', '$http', function ($scope, $http) {
 
         $http({
             url: '/getdata',
-            method: 'GET',            
-            headers:{
-                'Content-Type':'application/json'
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            params:{
-                lat:$scope.latitude,
-                lon:$scope.longitude,                
-                rad:$scope.radius
+            params: {
+                lat: $scope.latitude,
+                lon: $scope.longitude,
+                rad: $scope.radius
             }
         }).then(function success(response) {
-           // $scope.tweets=response;
-           //console.log(response)
+            $scope.tweets = response;
+            console.log(response)
 
         }, function error(error) {
-            console.log(error);            
+            console.log(error);
         });
 
 
