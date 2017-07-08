@@ -25,7 +25,6 @@ mappings={
    }
 }
 
-
 es.indices.create(index="twitter1",body=mappings)
 print "Mapping Complete"
               

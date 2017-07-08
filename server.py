@@ -2,6 +2,7 @@ from flask import jsonify, request,Flask
 from flask import render_template
 from flask import Flask
 from flask_elasticsearch import FlaskElasticsearch
+from flask import jsonify
 app=Flask(__name__)
 es = FlaskElasticsearch(app)
 
@@ -10,7 +11,7 @@ indexName = "test6"
 
 @app.route("/")
 def root():
-    return render_template('index.html')
+    return app.send_static_file('index.html')
 
 @app.route('/getdata',methods=['GET'])
 def test():
@@ -20,14 +21,15 @@ def test():
     # print longitude
 
     # elasticsearch query to get  tweets
-    query={"query": {"bool" : {"must" : {"query_string" : {"query":"neutral","fields":["sentiment"] }
+    query={"query": {"bool" : {"must" : {"query_string" : {"query":"positive","fields":["sentiment"] }
             },"filter" : {"geo_distance":{"distance":radius.encode("utf-8")+'m',"location":[ float(latitude.encode("utf-8")), float(longitude.encode("utf-8"))]}}}}}
 
     # query={"query": {"bool":{"must":{"filter":{"query":{"geo_distance":{"distance":"10m","location":[ 40, -100]}}}}}}}
     print query
     results = es.search(index="test6", body=query)
-    print "Number of results: ",results
-    return results
+
+    print "Number of results: ",results['hits']['total']
+    return jsonify(results['hits']['hits'])
 
 if __name__=='__main__':
      app.run(debug=True,port=8080)

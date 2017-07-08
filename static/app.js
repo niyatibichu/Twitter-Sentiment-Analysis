@@ -1,7 +1,7 @@
 var app = angular.module("myapp", []);
 
 app.controller("MainController", ['$scope', '$http', function ($scope, $http) {
-
+   // $scope.tweets=[];
     $scope.submitData = function () {
 
         console.log($scope.latitude);
@@ -20,8 +20,13 @@ app.controller("MainController", ['$scope', '$http', function ($scope, $http) {
                 rad: $scope.radius
             }
         }).then(function success(response) {
-            $scope.tweets = response;
-            console.log(response)
+            $scope.tweets=response.data;
+            console.log($scope.tweets);
+            // angular.forEach($scope.tweets, function (tweet) {
+            //     //$scope.text=tweet._source.text                
+            //     console.log("Tweet: ",tweet);
+            // });
+           // console.log($scope.tweets)
 
         }, function error(error) {
             console.log(error);

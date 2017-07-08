@@ -7,7 +7,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
@@ -58,17 +58,18 @@
                     </div>
                 </div>
             </form>
-        </div>
+        
        <div class="col s8">
             <ul class="collection" ng-if="tweets.length>0">
                 <li class="collection-item avatar" ng-repeat="tweet in tweets">
                     <i class="material-icons circle">person</i>
-                    <span class="title">{{tweet._score}}</span>
-                    <p>First Line<br> Second Line
+                    <span class="title" ng-maxlength="140">{{tweet._source.text}}</span>
+                    <p>{{tweet._source.date}}<br> {{tweet._source.Full_Name}}
                     </p>
                     <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                 </li>
             </ul>
+        </div>
         </div>
     </main>
 
@@ -102,7 +103,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+    <script type="text/javascript" src="angular-sanitize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
     <script type="text/javascript" src="static/app.js"></script>
 

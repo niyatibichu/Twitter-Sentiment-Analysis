@@ -61,7 +61,7 @@ class StreamListener(tweepy.StreamListener):
                 doc_body={
                             "ID":json_data["id"],
                             "text":json_data["text"],
-                            "date":json_data["created_at"],
+                            "created_at":json_data["created_at"],
                             "longitude":json_data["coordinates"]["coordinates"][0],
                             "latitude":json_data["coordinates"]["coordinates"][1],
                             "sentiment":sentiment,
@@ -70,15 +70,14 @@ class StreamListener(tweepy.StreamListener):
                             "Country_Code":json_data["place"]["country_code"],
                             "Full_Name":json_data["place"].get('full_name'),
                             "Name":json_data["place"].get('name'),
-                            "location":[json_data["coordinates"]["coordinates"][1],json_data["coordinates"]["coordinates"][0]]
-                        }      
+                            "location":[json_data["coordinates"]["coordinates"][1],json_data["coordinates"]["coordinates"][0]],
+                            "user":json_data["user"]
+                        }   
+                # print doc_body  
 
         
-                # es.index(index='location',doc_type="test5", body=mappings)
-                # es_entries['geo'] = 
-                # es_entries['location'] = [data['latitude'],data['longitude']]}
-                # # ...
-                es.index(index="test6", doc_type="test6",ignore=400, body=doc_body)
+               
+                es.index(index="twitter1", doc_type="tweets", body=doc_body,ignore=400)
 
 
         except Exception, e:
@@ -93,4 +92,5 @@ if __name__=='__main__':
                 
     twitterStream=Stream(auth,StreamListener())
 
+    # coordinates covering the entire earth
     twitterStream.filter(locations=[-180,-90,180,90])  
