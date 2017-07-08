@@ -18,17 +18,17 @@ def test():
     latitude=request.args.get('lat')
     longitude=request.args.get('lon') 
     radius=request.args.get('rad')   
-    # print longitude
+    # print(longitude)
 
     # elasticsearch query to get tweets
     query={"size": 250,  "sort" : [{ "created_at" : {"order" : "desc"}} ],"query": {"bool" : {"must" : {"query_string" : {"query":"positive","fields":["sentiment"] }
-            },"filter" : {"geo_distance":{"distance":radius.encode("utf-8")+'km',"location":[ float(latitude.encode("utf-8")), float(longitude.encode("utf-8"))]}}}}}
+            },"filter" : {"geo_distance":{"distance":radius+'km',"location":[ float(latitude), float(longitude)]}}}}}
 
     # query={"query": {"bool":{"must":{"filter":{"query":{"geo_distance":{"distance":"10m","location":[ 40, -100]}}}}}}}
-    print query
+    print(query)
     results = es.search(index="twitter1", body=query)
 
-    print "Number of results: ",results['hits']['total']
+    print("Number of results: ",results['hits']['total'])
     return jsonify(results['hits']['hits'])
 
 if __name__=='__main__':
