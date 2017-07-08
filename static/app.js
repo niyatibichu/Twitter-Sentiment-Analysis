@@ -22,6 +22,8 @@ app.controller("MainController", ['$scope', '$http', function ($scope, $http) {
         }).then(function success(response) {
             $scope.tweets=response.data;
             console.log($scope.tweets);
+
+            
             // angular.forEach($scope.tweets, function (tweet) {
             //     //$scope.text=tweet._source.text                
             //     console.log("Tweet: ",tweet);

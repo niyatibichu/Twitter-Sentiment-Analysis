@@ -7,7 +7,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 
 <body>
@@ -58,18 +58,40 @@
                     </div>
                 </div>
             </form>
-        
-       <div class="col s8">
-            <ul class="collection" ng-if="tweets.length>0">
-                <li class="collection-item avatar" ng-repeat="tweet in tweets">
-                    <i class="material-icons circle">person</i>
-                    <span class="title" ng-maxlength="140">{{tweet._source.text}}</span>
-                    <p>{{tweet._source.date}}<br> {{tweet._source.Full_Name}}
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-            </ul>
-        </div>
+
+            <div class="col s6" style="overflow-y: scroll; height: 500px;" ng-if="tweets.length>0">
+                <ul>
+                    <!--<blockquote>
+                        <li class="twitter-tweet" ng-repeat="tweet in tweets">
+                        <a href="{{tweet._source.user.profile_image_url_https}}"></a>
+
+                        <p>{{tweet._source.text}}</p>
+                        <p>{{tweet._source.created_at}}<br> {{tweet._source.Full_Name}}
+                        </p>
+                        <a href="#!"><i class="material-icons">grade</i></a>
+                         <hr>
+                    </li>
+                     </blockquote>-->
+                    <blockquote>
+                        <li class="twitter-tweet collection" ng-repeat="tweet in tweets">
+                            <div class="row">
+                                <div class="col s3">
+                                    <img class="collection-item" style="border-bottom: 0px" ng-src="{{tweet._source.user.profile_image_url_https}}" alt="">
+                                </div>
+                                <div class="col s9">
+                                    <p>{{tweet._source.user.name}}<br>
+                                    <span><a href="{{tweet._source.user.url}}">@{{tweet._source.user.screen_name}}</a></span></p>
+                                    <p>{{tweet._source.text}}</p>
+                                </div>
+                            </div>
+                            <a href="#!" style="float: left"><img style="height: 20px;width: 20px" src="http://pngimg.com/uploads/twitter/twitter_PNG28.png">{{tweet._source.created_at}}</a>
+                            
+                            <a href="#!" style="float: right">{{tweet._source.Full_Name}}<i class="material-icons">location_on</i></a>
+
+                        </li>
+                        <blockquote>
+                </ul>
+            </div>
         </div>
     </main>
 
@@ -103,7 +125,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-    <script type="text/javascript" src="angular-sanitize.min.js"></script>
+    <!--<script type="text/javascript" src="https//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-sanitize.js"></script>-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
     <script type="text/javascript" src="static/app.js"></script>
 

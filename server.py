@@ -7,7 +7,7 @@ app=Flask(__name__)
 es = FlaskElasticsearch(app)
 
 host = "http://localhost:9200"
-indexName = "test6"
+indexName = "twitter1"
 
 @app.route("/")
 def root():
@@ -20,13 +20,13 @@ def test():
     radius=request.args.get('rad')   
     # print longitude
 
-    # elasticsearch query to get  tweets
-    query={"query": {"bool" : {"must" : {"query_string" : {"query":"positive","fields":["sentiment"] }
-            },"filter" : {"geo_distance":{"distance":radius.encode("utf-8")+'m',"location":[ float(latitude.encode("utf-8")), float(longitude.encode("utf-8"))]}}}}}
+    # elasticsearch query to get tweets
+    query={"size": 250,  "sort" : [{ "created_at" : {"order" : "desc"}} ],"query": {"bool" : {"must" : {"query_string" : {"query":"positive","fields":["sentiment"] }
+            },"filter" : {"geo_distance":{"distance":radius.encode("utf-8")+'km',"location":[ float(latitude.encode("utf-8")), float(longitude.encode("utf-8"))]}}}}}
 
     # query={"query": {"bool":{"must":{"filter":{"query":{"geo_distance":{"distance":"10m","location":[ 40, -100]}}}}}}}
     print query
-    results = es.search(index="test6", body=query)
+    results = es.search(index="twitter1", body=query)
 
     print "Number of results: ",results['hits']['total']
     return jsonify(results['hits']['hits'])

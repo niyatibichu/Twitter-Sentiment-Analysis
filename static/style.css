@@ -1,4 +1,4 @@
-blockquote.twitter-tweet {
+.twitter-tweet {
   display: inline-block;
   font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
   font-size: 12px;
@@ -11,7 +11,7 @@ blockquote.twitter-tweet {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   margin: 10px 5px;
   padding: 0 16px 16px 16px;
-  max-width: 468px;
+  max-width: 470px;
 }
 
 blockquote.twitter-tweet p {
@@ -20,7 +20,7 @@ blockquote.twitter-tweet p {
   line-height: 20px;
 }
 
-blockquote.twitter-tweet a {
+blockquote.twitter-tweet a img {
   color: inherit;
   font-weight: normal;
   text-decoration: none;
@@ -31,3 +31,7 @@ blockquote.twitter-tweet a:hover,
 blockquote.twitter-tweet a:focus {
   text-decoration: underline;
 }
+
+/*alt{
+    background-image: url("https://seattlesportsnet.files.wordpress.com/2016/08/twitteregg.jpeg")
+}*/
