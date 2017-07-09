@@ -5,7 +5,7 @@ from elasticsearch import Elasticsearch
 logging.basicConfig(level=logging.INFO)
 
 # Parse the auth and host from env:
-bonsai = os.environ['BONSAI_URL']
+bonsai = os.environ['https://ej1hr91f:j84qb3g8x38stjt4@jasmine-7074319.us-east-1.bonsaisearch.net']
 auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
 host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
 
