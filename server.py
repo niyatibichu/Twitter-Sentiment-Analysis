@@ -1,12 +1,37 @@
+import os, base64, re, logging
 from flask import jsonify, request,Flask
 from flask import render_template
 from flask import Flask
 from flask_elasticsearch import FlaskElasticsearch
 from flask import jsonify
-app=Flask(__name__)
-es = FlaskElasticsearch(app)
+from elasticsearch import Elasticsearch
 
-host = "http://localhost:9200"
+portnum=os.environ['PORT']
+# Log transport details (optional):
+logging.basicConfig(level=logging.INFO)
+
+# Parse the auth and host from env:
+bonsai = os.environ['BONSAI_URL']
+auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
+host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
+
+# Connect to cluster over SSL using auth for best security:
+es_header = [{
+  'host': host,
+  'port': 443,
+  'use_ssl': True,
+  'http_auth': (auth[0],auth[1])
+}]
+
+
+app=Flask(__name__)
+# app.config.update(
+#     ELASTICSEARCH_HOST =host+':443'
+# )
+# es = FlaskElasticsearch(app)
+es=Elasticsearch(es_header)
+
+# host = "http://localhost:9200"
 indexName = "twitter1"
 
 @app.route("/")
@@ -32,5 +57,5 @@ def test():
     return jsonify(results['hits']['hits'])
 
 if __name__=='__main__':
-     app.run(debug=True,port=8080)
+     app.run(debug=True,port=portnum)
 

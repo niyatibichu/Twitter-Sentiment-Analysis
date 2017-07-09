@@ -4,6 +4,7 @@ import sys
 from tweepy import OAuthHandler
 from tweepy import Stream
 from textblob import TextBlob 
+import os, base64, re, logging
 from elasticsearch import Elasticsearch
 
 access_token = "95379124-oMzTvqi22DAXT1ME1HIKKvsdUJnkW6nCrK1QtBi0H"
@@ -12,10 +13,31 @@ consumer_key = "uRFTxTPfso3PJK8qfUhvZL9va"
 consumer_secret = "7WLYa526I316f2jddfs14UrGM6rtLXfbHZKo2xEYwEqqxCbf8s"
 
 
+# Log transport details (optional):
+logging.basicConfig(level=logging.INFO)
+
+# Parse the auth and host from env:
+bonsai = 'https://ej1hr91f:j84qb3g8x38stjt4@jasmine-7074319.us-east-1.bonsaisearch.net'
+auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
+host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
+
+# Connect to cluster over SSL using auth for best security:
+es_header = [{
+  'host': host,
+  'port': 443,
+  'use_ssl': True,
+  'http_auth': (auth[0],auth[1])
+}]
+
+# Instantiate the new Elasticsearch connection:
+es = Elasticsearch(es_header)
+
+# Verify that Python can talk to Bonsai (optional):
+es.ping()
 
 
 
-es = Elasticsearch()
+# es = Elasticsearch()
 
 class StreamListener(tweepy.StreamListener): 
     
@@ -77,22 +99,20 @@ class StreamListener(tweepy.StreamListener):
                             "location":[json_data["coordinates"]["coordinates"][1],json_data["coordinates"]["coordinates"][0]],
                             "user":json_data["user"]
                         }   
-                # print doc_body  
-
-        
+                # print doc_body         
                
                 es.index(index="twitter1", doc_type="tweets", body=doc_body,ignore=400)
 
 
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
 
 if __name__=='__main__':
     
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-    print "Started listening to tweets..."
+    print("Started listening to tweets...")
                 
     twitterStream=Stream(auth,StreamListener())
 
