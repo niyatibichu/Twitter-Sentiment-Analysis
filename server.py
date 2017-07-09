@@ -7,7 +7,7 @@ from flask import jsonify
 from elasticsearch import Elasticsearch
 import certifi
 
-portnum=os.environ['PORT']
+portnum=int(os.environ['PORT'])
 # Log transport details (optional):
 logging.basicConfig(level=logging.INFO)
 
