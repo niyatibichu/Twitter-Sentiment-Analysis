@@ -40,7 +40,7 @@ indexName = "twitter1"
 def root():
     return app.send_static_file('index.html')
 
-@app.route('/getdata',methods=['GET'])
+@app.route("/getdata",methods=['GET'])
 def test():
     latitude=request.args.get('lat')
     longitude=request.args.get('lon') 
