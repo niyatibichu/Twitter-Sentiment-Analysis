@@ -17,8 +17,9 @@ consumer_secret = "7WLYa526I316f2jddfs14UrGM6rtLXfbHZKo2xEYwEqqxCbf8s"
 logging.basicConfig(level=logging.INFO)
 
 # Parse the auth and host from env:
-bonsai = 'https://ej1hr91f:j84qb3g8x38stjt4@jasmine-7074319.us-east-1.bonsaisearch.net'
-auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
+# bonsai = 'https://ej1hr91f:j84qb3g8x38stjt4@jasmine-7074319.us-east-1.bonsaisearch.net'
+bonsai='https://12a754cb8ed901b20827cdcefffad337.us-east-1.aws.found.io:9243'
+auth = re.search('https\:\/\/(.*)', bonsai).group(1).split(':')
 host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
 
 # Connect to cluster over SSL using auth for best security:
@@ -99,7 +100,7 @@ class StreamListener(tweepy.StreamListener):
                             "location":[json_data["coordinates"]["coordinates"][1],json_data["coordinates"]["coordinates"][0]],
                             "user":json_data["user"]
                         }   
-                # print doc_body         
+                # print doc_body        
                
                 es.index(index="twitter1", doc_type="tweets", body=doc_body,ignore=400)
 
