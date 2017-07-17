@@ -60,11 +60,11 @@ def test():
     latitude=request.args.get('lat')
     longitude=request.args.get('lon') 
     radius=request.args.get('rad') 
-    keyword=request.args.get('key')  
+    keyw=request.args.get('keyw')  
     # print(longitude)
 
     # elasticsearch query to get tweets
-    query={"size": 250,  "sort" : [{ "created_at" : {"order" : "desc"}} ],"query": {"bool" : {"must" :[ {"match": { "text": keyword}},{"query_string" : {"query":"positive","fields":["sentiment"] }
+    query={"size": 250,  "sort" : [{ "created_at" : {"order" : "desc"}} ],"query": {"bool" : {"must" :[ {"match": { "text": keyw}},{"query_string" : {"query":"positive","fields":["sentiment"] }
             }],"filter" : {"geo_distance":{"distance":radius+'km',"location":[ float(latitude), float(longitude)]}}}}}
 
     # query={"query": {"bool":{"must":{"filter":{"query":{"geo_distance":{"distance":"10m","location":[ 40, -100]}}}}}}}
