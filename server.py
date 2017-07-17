@@ -46,6 +46,8 @@ es=Elasticsearch( ["https://e869964a0826f7ed5b493155cbea3ac2.us-east-1.aws.found
         timeout=50,
         ca_certs=certifi.where())
 
+es.ping()
+
 # host = "http://localhost:9200"
 indexName = "twitter1"
 
