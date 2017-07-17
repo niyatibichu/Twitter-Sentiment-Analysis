@@ -52,6 +52,13 @@
                     </div>
 
                     <div class="row">
+                        <div class="input-field col s12">
+                            <input id="keyword" type="text" class="validate" ng-model="keyword">
+                            <label for="keyword">Keyword</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <button class="btn waves-effect waves-light indigo" type="submit" ng-click="submitData()" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
@@ -80,12 +87,12 @@
                                 </div>
                                 <div class="col s9">
                                     <p>{{tweet._source.user.name}}<br>
-                                    <span><a href="{{tweet._source.user.url}}">@{{tweet._source.user.screen_name}}</a></span></p>
+                                        <span><a href="{{tweet._source.user.url}}">@{{tweet._source.user.screen_name}}</a></span></p>
                                     <p>{{tweet._source.text}}</p>
                                 </div>
                             </div>
                             <a href="#!" style="float: left"><img style="height: 20px;width: 20px" src="http://pngimg.com/uploads/twitter/twitter_PNG28.png">{{tweet._source.created_at}}</a>
-                            
+
                             <a href="#!" style="float: right">{{tweet._source.Full_Name}}<i class="material-icons">location_on</i></a>
 
                         </li>
