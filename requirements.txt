@@ -24,7 +24,7 @@ nltk==3.2.4
 oauthlib==2.0.2
 python-ecsclient==1.1.4
 pytz==2017.2
-PyYAML==3.12
+PyYAML==5.4
 requests==2.17.3
 requests-aws4auth==0.9
 requests-oauthlib==0.8.0
