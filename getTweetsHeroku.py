@@ -7,17 +7,16 @@ from textblob import TextBlob
 import os, base64, re, logging
 from elasticsearch import Elasticsearch
 
-access_token = "95379124-oMzTvqi22DAXT1ME1HIKKvsdUJnkW6nCrK1QtBi0H"
-access_token_secret = "5ABoRwhAJQGdlg7yaZbcLTvzbNYAQK8EAGjzHRl27pwp1"
-consumer_key = "uRFTxTPfso3PJK8qfUhvZL9va"
-consumer_secret = "7WLYa526I316f2jddfs14UrGM6rtLXfbHZKo2xEYwEqqxCbf8s"
+access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
+access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
+consumer_key = os.environ.get("TWITTER_CONSUMER_KEY")
+consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
 
 
 # Log transport details (optional):
 logging.basicConfig(level=logging.INFO)
 
 # Parse the auth and host from env:
-# bonsai = 'https://ej1hr91f:j84qb3g8x38stjt4@jasmine-7074319.us-east-1.bonsaisearch.net'
 bonsai='https://12a754cb8ed901b20827cdcefffad337.us-east-1.aws.found.io:9243'
 auth = re.search('https\:\/\/(.*)', bonsai).group(1).split(':')
 host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
