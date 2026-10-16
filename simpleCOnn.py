@@ -1,11 +1,12 @@
+import os
 import tweepy
 import json
 
 # Authentication details. To  obtain these visit dev.twitter.com
-consumer_key = 'nWGEdfoaBt7d6wWhiAw5Tw'
-consumer_secret = 'qM4QfDPqG9JQp6n0fqTCMrj6LJjES6vu2IzqpZLc'
-access_token = '2284416938-JbD4F32m9xQPMxKoh6UikpCLoJm8F6xy8wDPS9P'
-access_token_secret = 'XvJZQWa6zz5vHcHkUcYBacQKZJE9pcxbpxUUgNo9rN4AG'
+consumer_key = os.environ.get("TWITTER_CONSUMER_KEY")
+consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
+access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
+access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
 
 # This is the listener, resposible for receiving data
 class StdOutListener(tweepy.StreamListener):
