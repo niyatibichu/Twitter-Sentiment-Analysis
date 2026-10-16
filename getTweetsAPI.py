@@ -1,3 +1,4 @@
+import os
 import tweepy
 import json
 import sys
@@ -6,10 +7,10 @@ from tweepy import Stream
 from textblob import TextBlob 
 from elasticsearch import Elasticsearch
 
-access_token = "95379124-QaZp2IK7jlmrA8ueFPPXKTiIeApoCyMnrcPdYBKJL"
-access_token_secret = "AzcYVY7V9AtP7gPDkuzAmqxVr7CX6sfkXlr80nfe7ooRM"
-consumer_key = "Z4RGTfvIBjj50CixeZD0k6Z8G"
-consumer_secret = "zQtqyzT2MW18Qnh2i66U1Xx9ej7Ehx6AubnvfidLDzcMUK3HPU"
+access_token = os.environ.get("TWITTER_ACCESS_TOKEN")
+access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
+consumer_key = os.environ.get("TWITTER_CONSUMER_KEY")
+consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
 
 
 
