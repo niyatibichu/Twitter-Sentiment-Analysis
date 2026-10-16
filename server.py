@@ -13,7 +13,6 @@ logging.basicConfig(level=logging.INFO)
 
 # Parse the auth and host from env:
 # bonsai = os.environ['BONSAI_URL']
-# bonsai = "https://ej1hr91f:j84qb3g8x38stjt4@jasmine-7074319.us-east-1.bonsaisearch.net"
 # auth = re.search('https\:\/\/(.*)\@', bonsai).group(1).split(':')
 # host = bonsai.replace('https://%s:%s@' % (auth[0], auth[1]), '')
 
@@ -40,7 +39,7 @@ app=Flask(__name__)
 
 es=Elasticsearch( ["https://e869964a0826f7ed5b493155cbea3ac2.us-east-1.aws.found.io:9243"],
         # port=9243,
-        http_auth="elastic:nz0nxvrWuPkhZxwgnL09Cjpi",
+        http_auth=os.environ.get("ES_HTTP_AUTH"),
         use_ssl=True,
         verify_certs=True,
         timeout=50,
